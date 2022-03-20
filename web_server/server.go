@@ -20,6 +20,15 @@ func NewServer(port string) *Server {
 func (s *Server) Handle(path string, handler http.HandlerFunc) {
 	s.router.rules[path] = handler
 }
+
+// Se agrega ... cuando no se conoce la cantidad de parametros de ese tipo
+func (s *Server) AddMiddleware(f http.HandlerFunc, middlewares ...Middleware) http.HandlerFunc {
+	for _, m := range middlewares {
+		f = m(f)
+	}
+	return f
+}
+
 func (s *Server) Listen() error {
 	// El router va a ser el encargado se procesar las URL y procesarlas como se debe
 	// El '/' represanta el punto de entrada y 's.router' el que va a manejar dicha ruta
