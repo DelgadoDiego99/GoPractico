@@ -17,8 +17,12 @@ func NewServer(port string) *Server {
 	}
 }
 
-func (s *Server) Handle(path string, handler http.HandlerFunc) {
-	s.router.rules[path] = handler
+func (s *Server) Handle(path, method string, handler http.HandlerFunc) {
+	_, exist := s.router.rules[path]
+	if !exist {
+		s.router.rules[path] = make(map[string]http.HandlerFunc)
+	}
+	s.router.rules[path][method] = handler
 }
 
 // Se agrega ... cuando no se conoce la cantidad de parametros de ese tipo
