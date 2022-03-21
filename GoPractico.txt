@@ -1,0 +1,6 @@
+Para microservicios
+
+Scaffold recomendado para los proyectos: https://github.com/golang-standards/project-layout
+GORM como ORM (relacionales)
+MongoDB -> https://docs.mongodb.com/drivers/go/
+Framework -> https://gin-gonic.com/ (super rápido para microservicios)
